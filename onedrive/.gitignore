@@ -1,0 +1,4 @@
+.config.backup
+.config.hash
+items.sqlite3
+refresh_token

@@ -1,0 +1,9 @@
+default-timeout=3000
+
+font=JetBrains Mono 10
+text-color=#ffffff
+background-color=#30303088
+border-size=0
+border-radius=15
+icons=1
+
