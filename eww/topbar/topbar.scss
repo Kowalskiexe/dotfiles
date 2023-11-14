@@ -1,0 +1,79 @@
+@import '/home/inter/.cache/wal/colors.scss';
+
+* {
+  all: unset;
+  font-family: JetBrains Mono;
+}
+
+.bar {
+  background-color: rgba(0, 0, 0, 0.0);
+  padding: 5px;
+}
+
+.hyprland-workspaces button {
+  padding: 5px;
+  min-width: 10px;
+  color: $background;
+  &:hover, &:hover.used {
+    color: white;
+  }
+  &.used {
+    color: #bbbbbb;
+  }
+  &.active {
+    color: white;
+  }
+}
+
+$alpha: 0.5;
+
+.section {
+  background-color: blue;
+  padding: 0px 10px;
+  border-radius: 25px;
+
+  &.wofi {
+    background-color: rgba($color9, $alpha);
+  }
+  &.workspaces {
+    background-color: rgba($color9, $alpha);
+  }
+  &.clock {
+    background-color: rgba($color9, $alpha);
+  }
+  &.sound-volume {
+    background-color: rgba($color9, $alpha);
+    label {
+      margin-left: 7px;
+    }
+  }
+  &.network {
+    background-color: rgba($color9, $alpha);
+  }
+  &.battery {
+    background-color: rgba($color9, $alpha);
+    .status {
+      margin-right: 7px;
+    }
+    label {
+      margin-left: 7px;
+    }
+  }
+  &.poweroff {
+    background-color: rgba($color9, $alpha);
+  }
+  &.tray {
+    background-color: rgba($color9, $alpha);
+  }
+}
+
+menu {
+  background-color: rgba($color9, $alpha);
+}
+menuitem:hover {
+  background-color: darken($color9, 20%);
+}
+menuitem {
+  margin: 0px 3px;
+}
+

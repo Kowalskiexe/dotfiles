@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+eww update daily-fortune="$(fortune -n 200)"

@@ -1,0 +1,215 @@
+(defpoll time :interval "0.1s"
+               :initial "21:37"
+               :run-while true
+  `date +"%a, %e %b, %H:%M:%S"`)
+
+(defwidget section [name]
+  (box :class "section ${name}"
+    (children)))
+
+(defwidget clock []
+  "${time}")
+
+(deflisten run-active-workspace :initial "prerun_aw"
+    ;; a hack to start a script from .yuck file
+    ;; NOTE: the variable must be used somewhere in
+    ;; order for this hack to work!
+    "./topbar/scripts/start_activeworkspace.sh")
+(defvar active-workspace "1")
+
+(deflisten run-workspaces-in-use :initial "prerun_wiu"
+    "./topbar/scripts/start_workspacesinuse.sh")
+(defvar workspaces-in-use '{"1": true, "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false }')
+
+(defwidget hyprland-workspaces []
+  (box :class "hyprland-workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+       :spacing 10
+       ;; this activates hacky scripts
+       :tooltip "${run-active-workspace}|${run-workspaces-in-use}"
+    (button :onclick "hyprctl dispatch workspace 1"
+            :class {(active-workspace == "1" ? "active" :
+                      (workspaces-in-use["1"] ? "used" : ""))}
+      "一")
+    (button :onclick "hyprctl dispatch workspace 2"
+            :class {(active-workspace == "2" ? "active" :
+                      (workspaces-in-use["2"] ? "used" : ""))}
+      "二")
+    (button :onclick "hyprctl dispatch workspace 3"
+            :class {(active-workspace == "3" ? "active" :
+                      (workspaces-in-use["3"] ? "used" : ""))}
+      "三")
+    (button :onclick "hyprctl dispatch workspace 4"
+            :class {(active-workspace == "4" ? "active" :
+                      (workspaces-in-use["4"] ? "used" : ""))}
+      "四")
+    (button :onclick "hyprctl dispatch workspace 5" 
+            :class {(active-workspace == "5" ? "active" :
+                      (workspaces-in-use["5"] ? "used" : ""))}
+      "五")
+    (button :onclick "hyprctl dispatch workspace 6" 
+            :class {(active-workspace == "6" ? "active" :
+                      (workspaces-in-use["6"] ? "used" : ""))}
+      "六")
+    (button :onclick "hyprctl dispatch workspace 7" 
+            :class {(active-workspace == "7" ? "active" :
+                      (workspaces-in-use["7"] ? "used" : ""))}
+      "七")
+    (button :onclick "hyprctl dispatch workspace 8"
+            :class {(active-workspace == "8" ? "active" :
+                      (workspaces-in-use["8"] ? "used" : ""))}
+      "八")
+    (button :onclick "hyprctl dispatch workspace 9"
+            :class {(active-workspace == "9" ? "active" :
+                      (workspaces-in-use["9"] ? "used" : ""))}
+      "九")
+    (button :onclick "hyprctl dispatch workspace 10"
+            :class {(active-workspace == "10" ? "active" :
+                      (workspaces-in-use["10"] ? "used" : ""))}
+      "十")))
+
+(defwidget poweroff []
+  (button :onclick "powermenu"
+    (image :path "./topbar/icons/power-off-solid-white.png"
+           :image-width 15
+           :image-height 15)))
+
+(defwidget wofi []
+  (button :onclick "/home/inter/.local/bin/menu"
+    (image :path "./topbar/icons/archlinux-white.png"
+           :image-width 15
+           :image-height 15)))
+
+(defpoll battery-time :interval "10s"
+  "acpi -b | tail -n 1 | sed -E 's/.*, //;s/(.{2}:.{2}).*/\\1/'")
+
+(defwidget battery []
+  (box :space-evenly false
+       :tooltip "${EWW_BATTERY.BAT1.capacity}% ${battery-time}"
+    (image :path "./topbar/icons/power-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {EWW_BATTERY.BAT1.status == "Charging"}
+           :class "status")
+    (image :path "./topbar/icons/tick-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {EWW_BATTERY.BAT1.status == "Full"}
+           :class "status")
+    (image :path "./topbar/icons/battery-0-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {EWW_BATTERY.BAT1.capacity <= 20})
+    (image :path "./topbar/icons/battery-1-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {20 < EWW_BATTERY.BAT1.capacity && EWW_BATTERY.BAT1.capacity <= 40})
+    (image :path "./topbar/icons/battery-2-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {40 < EWW_BATTERY.BAT1.capacity && EWW_BATTERY.BAT1.capacity <= 60})
+    (image :path "./topbar/icons/battery-3-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {60 < EWW_BATTERY.BAT1.capacity && EWW_BATTERY.BAT1.capacity <= 80})
+    (image :path "./topbar/icons/battery-4-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {80 < EWW_BATTERY.BAT1.capacity})
+    (label :text "${EWW_BATTERY.BAT1.capacity}% ${battery-time}"
+           :visible {EWW_BATTERY.BAT1.status == "Discharging" || EWW_BATTERY.BAT1.status == "Charging"})))
+
+(deflisten run-update-volume-file :initial "prerun"
+    "./topbar/scripts/update_volume_file.sh")
+
+(deflisten volume :initial "0.x"
+  `tail -F /tmp/audio2137`)
+
+(defwidget sound-volume [?vol]
+  (eventbox :onscroll "setvolumeupanoch {}"
+            :onclick "setvolumeupanoch mute"
+            :onrightclick "pavu"
+            :tooltip "${run-update-volume-file}"
+    (box :space-evenly false
+      (image :path "./topbar/icons/speaker3-white.png"
+             :image-width 15
+             :image-height 15)
+      (label :text "${volume}"))))
+
+(defpoll connection :interval "2s"
+  "./topbar/scripts/network")
+
+(defwidget network []
+  (box :space-evenly false
+    (image :path "./topbar/icons/ethernet-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {connection.eth})
+    (label :text "${connection.name} "
+           :visible {!connection.eth && connection.wifi})
+    (image :path "./topbar/icons/bar_a1-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 1})
+    (image :path "./topbar/icons/bar_a2-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 2})
+    (image :path "./topbar/icons/bar_a3-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 3})
+    (image :path "./topbar/icons/bar_a4-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 4})
+    (image :path "./topbar/icons/offline-red.png"
+           :image-width 19
+           :image-height 19
+           :visible {!connection.eth && !connection.wifi})))
+
+(defwidget bar []
+  (centerbox :orientation "h"
+             :class "bar"
+    (box :halign "start"
+         :space-evenly false
+         :spacing 6
+      (section :name "wofi"
+        (wofi))
+      (section :name "workspaces"
+        (hyprland-workspaces)))
+    (box :halign "center"
+         :space-evenly false
+         :spacing 6
+      (section :name "clock"
+        (clock)))
+    (box :halign "end"
+         :space-evenly false
+         :spacing 6
+      (section :name "sound-volume"
+        (sound-volume))
+      (section :name "network"
+        (network))
+      (section :name "tray"
+        (systray :class "tray" :icon-size 18))
+      (section :name "battery"
+        (battery))
+      (section :name "poweroff"
+        (poweroff))
+      )))
+
+(defwindow top-bar
+          :monitor 0
+          :geometry (geometry :x "0px"
+                              :y "0px"
+                              :width "100%"
+                              :height "30px"
+                              :anchor "top center")
+          :windowtype "dock"
+          :reserve (struts :side "top" :distance "0%")
+          :exclusive true
+  (bar))
+
+; vi: ft=lisp

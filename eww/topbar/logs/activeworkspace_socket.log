@@ -1,0 +1,172 @@
+windowtitle>>5576d1b8a1c0
+createworkspace>>2
+activewindow>>,
+destroyworkspace>>1
+workspace>>2
+activewindowv2>>,
+createworkspace>>1
+activewindow>>,
+workspace>>1
+activewindowv2>>,
+destroyworkspace>>2
+createworkspace>>2
+activewindow>>,
+activewindowv2>>,
+workspace>>2
+destroyworkspace>>1
+createworkspace>>3
+activewindow>>,
+activewindowv2>>,
+workspace>>3
+destroyworkspace>>2
+createworkspace>>2
+workspace>>2
+activewindow>>,
+activewindowv2>>,
+destroyworkspace>>3
+createworkspace>>1
+activewindow>>,
+activewindowv2>>,
+workspace>>1
+destroyworkspace>>2
+createworkspace>>2
+activewindowv2>>,
+activewindow>>,
+workspace>>2
+destroyworkspace>>1
+activewindow>>kitty,fish
+activewindowv2>>5576d1bb3110
+openwindow>>5576d1bb3110,2,kitty,fish
+activewindow>>kitty,~
+windowtitle>>5576d1bb3110
+activewindowv2>>5576d1bb3110
+windowtitle>>5576d1bb3110
+activewindow>>kitty,eww logs ~
+activewindowv2>>5576d1bb3110
+windowtitle>>5576d1bb3110
+activewindowv2>>5576d1bb3110
+activewindow>>kitty,~
+createworkspace>>1
+activewindow>>,
+activewindowv2>>,
+workspace>>1
+activewindow>>kitty,~
+activewindowv2>>5576d1bb3110
+workspace>>2
+destroyworkspace>>1
+createworkspace>>3
+activewindow>>,
+workspace>>3
+activewindowv2>>,
+activewindow>>,
+createworkspace>>1
+activewindowv2>>,
+workspace>>1
+destroyworkspace>>3
+activewindow>>kitty,~
+activewindowv2>>5576d1bb3110
+workspace>>2
+destroyworkspace>>1
+closewindow>>5576d1bb3110
+createworkspace>>1
+workspace>>1
+activewindowv2>>,
+activewindow>>,
+destroyworkspace>>2
+openlayer>>wofi
+closelayer>>wofi
+activewindow>>,
+activewindowv2>>,
+activewindow>>,
+activewindowv2>>,
+activewindow>>vivaldi-stable,Vivaldi - Vivaldi
+activewindowv2>>5576d1bd5250
+openwindow>>5576d1bd5250,1,vivaldi-stable,Vivaldi - Vivaldi
+createworkspace>>2
+activewindowv2>>,
+workspace>>2
+activewindow>>,
+activewindow>>vivaldi-stable,Vivaldi - Vivaldi
+activewindowv2>>5576d1bd5250
+destroyworkspace>>2
+workspace>>1
+createworkspace>>2
+activewindowv2>>,
+activewindow>>,
+workspace>>2
+windowtitle>>5576d1bd5250
+activewindow>>kitty,fish
+activewindowv2>>5576d1be1a30
+openwindow>>5576d1be1a30,2,kitty,fish
+windowtitle>>5576d1be1a30
+activewindow>>kitty,~
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,cd .config/eww/topba ~
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.c/e/topbar
+windowtitle>>5576d1be1a30
+activewindow>>kitty,ls ~/.c/e/topbar
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.c/e/topbar
+windowtitle>>5576d1be1a30
+activewindow>>kitty,cd .. ~/.c/e/topbar
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindow>>kitty,~/.c/eww
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindow>>kitty,ls ~/.c/eww
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindow>>kitty,~/.c/eww
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindow>>kitty,la ~/.c/eww
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.c/eww
+windowtitle>>5576d1be1a30
+activewindow>>kitty,cd .. ~/.c/eww
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.config
+windowtitle>>5576d1be1a30
+activewindow>>kitty,ls ~/.config
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.config
+windowtitle>>5576d1be1a30
+activewindow>>kitty,rm -r eww.old/ ~/.config
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,~/.config
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,cd ~/.config
+windowtitle>>5576d1be1a30
+activewindow>>kitty,~
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,cd dotfiles/ ~
+windowtitle>>5576d1be1a30
+activewindow>>kitty,~/dotfiles
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+activewindow>>kitty,ls ~/dotfiles
+activewindow>>kitty,~/dotfiles
+windowtitle>>5576d1be1a30
+activewindowv2>>5576d1be1a30
+windowtitle>>5576d1be1a30
+activewindow>>kitty,git add eww/ ~/dotfiles
+activewindowv2>>5576d1be1a30
