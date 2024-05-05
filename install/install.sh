@@ -114,6 +114,53 @@ install_bootloader() {
     grub-mkconfig -o /boot/grub/grub.cfg
 }
 
+install_microcode() {
+    # determine processor type and install microcode
+    proc_type=$(lscpu)
+    if grep -E "GenuineIntel" <<< ${proc_type}; then
+        echo "Installing Intel microcode"
+        pacman -S --noconfirm --needed intel-ucode
+    elif grep -E "AuthenticAMD" <<< ${proc_type}; then
+        echo "Installing AMD microcode"
+        pacman -S --noconfirm --needed amd-ucode
+    fi
+}
+
+install_gpu_driver() {
+    # Graphics Drivers find and install
+    gpu_type=$(lspci)
+    if grep -E "NVIDIA|GeForce" <<< ${gpu_type}; then
+        pacman -S --noconfirm --needed nvidia
+        nvidia-xconfig
+    elif lspci | grep 'VGA' | grep -E "Radeon|AMD"; then
+        pacman -S --noconfirm --needed xf86-video-amdgpu
+    elif grep -E "Integrated Graphics Controller" <<< ${gpu_type}; then
+        pacman -S --noconfirm --needed libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa
+    elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
+        pacman -S --needed --noconfirm libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa
+    fi
+}
+
+add_user() {
+    # -m -- create user's home directory
+    # -G -- add user to groups
+    useradd -m -G wheel -s /bin/bash inter
+    # default user password
+    passwd --stdin inter <<< "inter"
+}
+
+install_gui() {
+    pacman -S --noconfirm sddm
+    pacman -S --noconfirm hyprland
+}
+
+user_stage() {
+    install_microcode
+    install_gpu_driver
+    add_user
+    install_gui
+}
+
 postchroot_stage() {
     systemctl enable NetworkManager
 
@@ -134,10 +181,14 @@ postchroot_stage() {
     echo 't470' > /etc/hostname
 
     # Default root password
-    echo "root" | passwd root --stdin
+    passwd root --stdin <<< "root"
 
     log "Installing bootloader"
     install_bootloader
+
+    log "Basic install done!"
+    # a vey basic system should now be bootable
+    user_stage
 
     log "Done! Now try rebooting"
     exec /bin/bash
