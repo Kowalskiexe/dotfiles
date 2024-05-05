@@ -151,6 +151,8 @@ add_user() {
 
 install_gui() {
     pacman -S --noconfirm sddm
+    systemctl enable sddm
+    pacman -S --noconfirm kitty
     pacman -S --noconfirm hyprland
 }
 
