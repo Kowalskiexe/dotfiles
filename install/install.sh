@@ -14,12 +14,12 @@ log() {
 }
 
 help() {
-    echo "Usage: archinstall STAGE [DISK]"
+    echo "Usage: install.sh STAGE [DISK]"
     echo "Install preconfigured Arch Linux on DISK."
     echo "STAGE can be either prechroot or postchroot"
     echo
     echo "If STAGE is prechroot then a proper disk device must be provided as the second argument."
-    echo "e.g. archinstall prechroot /dev/sda"
+    echo "e.g. install.sh prechroot /dev/sda"
 }
 
 setup_pacman() {
@@ -97,9 +97,9 @@ prechroot_stage() {
     genfstab -U /mnt >> /mnt/etc/fstab
 
     # copy this script into chroot directory
-    cp "$(pwd)/$0"  /mnt/archinstall
+    cp "$(pwd)/$0"  /mnt/install.sh
     # proceed to postchroot stage
-    exec arch-chroot /mnt /archinstall postchroot
+    exec arch-chroot /mnt /install.sh postchroot
 }
 
 generate_locale() {
