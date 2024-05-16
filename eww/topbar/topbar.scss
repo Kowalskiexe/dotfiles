@@ -3,11 +3,12 @@
 * {
   all: unset;
   font-family: JetBrains Mono;
+  font-size: 10pt;
 }
 
 .bar {
   background-color: rgba(0, 0, 0, 0.0);
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
 }
 
 .hyprland-workspaces button {

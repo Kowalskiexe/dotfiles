@@ -10,7 +10,7 @@ flock -x -n 9 || exit      # grab that lock, or exit the script early
 logs_dir="$(dirname "$0")/../logs"
 
 echo 'started_wiu'
-socat -t1000000 - UNIX-CLIENT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock 2> "$logs_dir/workspacesinuse_error.log" \
+socat -t1000000 - UNIX-CLIENT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock 2> "$logs_dir/workspacesinuse_error.log" \
     | tee "$logs_dir/workspacesinuse_socket.log" \
     | "$(dirname "$0")/workspacesinuse.sh" &> "$logs_dir/workspacesinuse.log"
 echo 'end_wiu'
