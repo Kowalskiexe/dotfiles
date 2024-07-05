@@ -8,4 +8,5 @@ lazy = true
 
 [scratchpads.discord]
 command = "webcord"
+position = "5% 5%"
 lazy = true

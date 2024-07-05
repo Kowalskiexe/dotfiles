@@ -1,0 +1,16 @@
+snippet algo
+    #!/usr/bin/env python3
+    import sys
+
+    def eprint(*args, **kwargs):
+        print(*args, file=sys.stderr, **kwargs)
+
+
+    def main():
+        n = int(input())
+        for _ in range(n):
+            pass
+
+
+    if __name__ == '__main__':
+        main()
