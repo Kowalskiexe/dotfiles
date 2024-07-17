@@ -192,7 +192,7 @@
       (section :name "network"
         (network))
       (section :name "tray"
-        (systray :class "tray" :icon-size 18))
+        (systray :class "tray" :icon-size 18 :spacing 6))
       (section :name "battery"
         (battery))
       (section :name "poweroff"
