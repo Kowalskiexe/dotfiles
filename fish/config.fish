@@ -5,6 +5,7 @@ if status is-interactive
     alias hotspot "killall lnxrouter ; sudo ip link set down wlp4s0 ; sudo lnxrouter --ap wlp4s0 Arch -p haslohaslo --ieee80211ac"
     alias ff "firefox"
     alias r "ranger"
+    alias nix "nix --experimental-features 'nix-command flakes'"
     alias py10 "python3.10"
     alias gs "git status"
     alias gc "git commit"
@@ -16,7 +17,14 @@ if status is-interactive
     alias gf "git fetch"
 end
 
-fish_add_path "/home/inter/.local/bin"
+set EDITOR nvim
+
+ulimit -n 2048
+bind --user -M insert \ch accept-autosuggestion
+
+fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.tmux/plugins/tmuxifier/bin"
 
 starship init fish | source
 thefuck --alias | source
+eval (tmuxifier init - fish)
