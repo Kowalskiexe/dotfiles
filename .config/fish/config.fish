@@ -23,6 +23,7 @@ ulimit -n 2048
 bind --user -M insert \ch accept-autosuggestion
 
 fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.bin"
 fish_add_path "$HOME/.tmux/plugins/tmuxifier/bin"
 
 starship init fish | source
