@@ -27,5 +27,4 @@ fish_add_path "$HOME/.bin"
 fish_add_path "$HOME/.tmux/plugins/tmuxifier/bin"
 
 starship init fish | source
-thefuck --alias | source
 eval (tmuxifier init - fish)
