@@ -12,6 +12,7 @@ vim.cmd("set mouse=nvi")
 vim.cmd("set relativenumber")
 vim.cmd("set number relativenumber")
 vim.cmd("set cc=80")
+vim.cmd("setlocal spell spelllang=en_us")
 
 -- Determine how text with the "conceal" syntax attribute :syn-conceal
 -- 	is shown: (needed fo obsidian)
