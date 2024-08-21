@@ -26,5 +26,7 @@ fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.bin"
 fish_add_path "$HOME/.tmux/plugins/tmuxifier/bin"
 
+set -x TERM xterm-256color
+
 starship init fish | source
 eval (tmuxifier init - fish)
