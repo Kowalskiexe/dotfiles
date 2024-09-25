@@ -1,8 +1,3 @@
-clock
-fade-in=5
 ignore-empty-password
 show-failed-attempts
-grace=5
-screenshots
-effect-blur=10x10
-effect-greyscale
+image=/home/inter/Pictures/Wallpapers/night.jpg
