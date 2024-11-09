@@ -1,1 +1,6 @@
-# **/*.log turns out I need those logs
+**/*.log
+
+
+# fish
+.config/fish/fish_variables
+
