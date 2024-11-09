@@ -1,0 +1,31 @@
+target-version = "py310"
+
+
+[lint]
+extend-select = [
+    "A", # flake8-builtins
+    "ASYNC", # flake8-async
+    "B", # flake8-bugbear
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
+    "COM", # flake8-commas
+    "E", # pycodestyle errors
+    # "ERA", # eradicate
+    "FAST", # FastAPI
+    "FBT", # flake8-boolean-trap
+    "I", # isort
+    "ICN", # flake8-import-conventions
+    "N", # pep8-naming
+    "PD", # pandas-vet
+    "PIE", # flake8-pie
+    "PL", # Pylint
+    "Q", # flake8-quotes
+    "RUF", # Ruff-specific rules
+    "S", # flake8-bandit
+    "SIM", # flake8-simplify
+    "TCH", # flake8-type-checking
+    "UP", # pyupgrade
+    "W", # pycodestyle warnings
+    "YTT", # flake8-2020
+]
+

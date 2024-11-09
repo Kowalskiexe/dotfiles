@@ -98,15 +98,32 @@ return {
             require("lspconfig")["mojo"].setup({
                 capabilities = capabilities,
             })
+            require("lspconfig")["phpactor"].setup({
+                capabilities = capabilities,
+            })
             require("lspconfig")["lua_ls"].setup({
                 capabilities = capabilities,
             })
             require("lspconfig")["nil_ls"].setup({
                 capabilities = capabilities,
             })
-            require("lspconfig")["pyright"].setup {
-                capabilities = capabilities
-            }
+            require("lspconfig")["pyright"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["clangd"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["bashls"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig").ruff.setup({
+                capabilities = capabilities,
+                init_options = {
+                    settings = {
+                        configuration = "~/.config/nvim/ruff.toml",
+                    },
+                },
+            })
             -- require("lspconfig")["basedpyright"].setup {
             --     capabilities = capabilities
             -- }

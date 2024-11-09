@@ -8,8 +8,8 @@ return {
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.black,
-                -- null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.ruff,
+                null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.completion.spell,
                 null_ls.builtins.completion.luasnip,
@@ -20,6 +20,7 @@ return {
                 require("none-ls.diagnostics.cpplint"),
                 require("none-ls.formatting.jq"),
                 require("none-ls.formatting.eslint_d"),
+                require("none-ls.formatting.autopep8"),
             },
         })
     end,

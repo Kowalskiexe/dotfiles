@@ -6,9 +6,8 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "tsserver",
+                    "ts_ls",
                     "pyright",
-                    "clangd",
                     "tailwindcss",
                 },
             })

@@ -22,7 +22,7 @@ end, opts)
 
 -- CopilotChat
 vim.keymap.set("n", "<Leader>cct", ":CopilotChatToggle<CR>", opts)
-vim.keymap.set("n", "<Leader>cc", ":CopilotChat ", { silent = false })
+vim.keymap.set("n", "<Leader>ccc", ":CopilotChat ", { silent = false })
 vim.keymap.set("n", "<Leader>cce", ":CopilotChatExplain<CR>", opts)
 vim.keymap.set("n", "<Leader>ccf", ":CopilotChatFix<CR>", opts)
 vim.keymap.set("n", "<Leader>ccfd", ":CopilotChatFixDiagnostic<CR>", opts)
