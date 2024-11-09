@@ -1,3 +1,5 @@
 .fortune {
-  color: rgba(255, 255, 255, 0.75)
+  color: white;
+  background-color: transparent;
+  text-shadow: 2px 2px 2px black, 2px -2px 2px black, -2px 2px 2px black, -2px -2px 2px black;
 }

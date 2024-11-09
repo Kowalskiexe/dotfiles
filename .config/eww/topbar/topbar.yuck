@@ -14,11 +14,11 @@
     ;; a hack to start a script from .yuck file
     ;; NOTE: the variable must be used somewhere in
     ;; order for this hack to work!
-    "./topbar/scripts/start_activeworkspace.sh")
+    "/home/inter/.config/eww/topbar/scripts/start_activeworkspace.sh")
 (defvar active-workspace "1")
 
 (deflisten run-workspaces-in-use :initial "prerun_wiu"
-    "./topbar/scripts/start_workspacesinuse.sh")
+    "/home/inter/.config/eww/topbar/scripts/start_workspacesinuse.sh")
 (defvar workspaces-in-use '{"1": true, "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false }')
 
 (defwidget hyprland-workspaces []
@@ -121,7 +121,7 @@
            :visible {EWW_BATTERY.BAT1.status == "Discharging" || EWW_BATTERY.BAT1.status == "Charging"})))
 
 (deflisten run-update-volume-file :initial "prerun"
-    "./topbar/scripts/update_volume_file.sh")
+    "/home/inter/.config/eww/topbar/scripts/update_volume_file.sh")
 
 (deflisten volume :initial "0.x"
   `tail -F /tmp/audio2137`)
@@ -138,7 +138,7 @@
       (label :text "${volume}"))))
 
 (defpoll connection :interval "2s"
-  "./topbar/scripts/network")
+  "/home/inter/.config/eww/topbar/scripts/network")
 
 (defwidget network []
   (box :space-evenly false
@@ -175,8 +175,8 @@
     (box :halign "start"
          :space-evenly false
          :spacing 6
-      (section :name "wofi"
-        (wofi))
+      ;; (section :name "wofi"
+      ;;   (wofi))
       (section :name "workspaces"
         (hyprland-workspaces)))
     (box :halign "center"
@@ -195,8 +195,8 @@
         (systray :class "tray" :icon-size 18 :spacing 6))
       (section :name "battery"
         (battery))
-      (section :name "poweroff"
-        (poweroff))
+      ;; (section :name "poweroff"
+      ;;   (poweroff))
       )))
 
 (defwindow top-bar
