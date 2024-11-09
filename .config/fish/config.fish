@@ -15,11 +15,15 @@ if status is-interactive
     alias gp "git push"
     alias gpl "git pull"
     alias gf "git fetch"
+
+    atuin init fish | source
+    zoxide init fish --cmd cd | source
+    starship init fish | source
 end
 
 set EDITOR nvim
 
-ulimit -n 2048
+ulimit -n 4096
 bind --user -M insert \ch accept-autosuggestion
 
 fish_add_path "$HOME/.local/bin"
@@ -28,5 +32,4 @@ fish_add_path "$HOME/.tmux/plugins/tmuxifier/bin"
 
 set -x TERM xterm-256color
 
-starship init fish | source
 eval (tmuxifier init - fish)
