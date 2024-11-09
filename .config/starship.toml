@@ -1,6 +1,15 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+
+# format = """
+# [┌───────────────────>](bold mycol)
+# [│]($mycol)$directory$rust$package
+# [└─>](bold red) """
+
+right_format = "$cmd_duration $git_branch$git_state$git_status"
+
+
 # Inserts a blank line between shell prompts
 add_newline = true
 
@@ -11,3 +20,12 @@ success_symbol = '[λ](bold green)' # The 'success_symbol' segment is being set 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[gcloud]
+disabled = true
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+
+[nix_shell]
+format = '[\($name\)]($style) '
