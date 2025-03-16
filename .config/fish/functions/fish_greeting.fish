@@ -1,3 +1,7 @@
 function fish_greeting
-	lolcat "/home/inter/.config/fish/functions/ascii.txt"
+    set message (curl -s --max-time 0.5 'wttr.in/?format=3')
+    if test "$message" = ""
+        set message "idk"
+    end
+    cowsay -f "/home/inter/.config/fish/functions/cat.cow" "$message" | lolcat
 end
