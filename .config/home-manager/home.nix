@@ -1,4 +1,9 @@
-{ config, pkgs, stable, ... }:
+{ config, pkgs, ... }:
+let
+  stable = import <nixos-24.05> {
+    config = config.nixpkgs.config;
+  };
+in
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -21,25 +26,33 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.cmatrix
+    pkgs.aerc
+    pkgs.zotero
+    pkgs.syncthing
+    pkgs.blender
+    pkgs.git-standup
+    pkgs.inxi
+    pkgs.klavaro
+    pkgs.yt-dlp
+    pkgs.syncthingtray
     pkgs.cmake
-    pkgs.# onedrive
     pkgs.nodejs_22
     pkgs.yarn-berry
     pkgs.cargo
     pkgs.spotify
     pkgs.keepassxc
-    pkgs.nerdfonts
     pkgs.libgcc
     pkgs.google-chrome
     pkgs.electron
     pkgs.webcord
     pkgs.pyprland
     pkgs.swww
-    pkgs.yazi
     pkgs.fcitx5
     pkgs.brightnessctl
     pkgs.fish
     pkgs.lolcat
+    pkgs.cowsay
     pkgs.neofetch
     pkgs.bat
     pkgs.starship
@@ -62,10 +75,11 @@
     pkgs.blueman
     pkgs.playerctl
     pkgs.zathura
+    pkgs.pdfgrep
     pkgs.texliveFull
     pkgs.xdotool
     pkgs.signal-desktop
-    pkgs.gimp-with-plugins
+    pkgs.gimp
     pkgs.neovide
     pkgs.obsidian
     pkgs.libreoffice-qt6-fresh
@@ -98,6 +112,51 @@
     pkgs.htop
     pkgs.luajitPackages.luarocks
     pkgs.stow
+    pkgs.acpi
+    pkgs.irssi
+    pkgs.calibre
+    pkgs.zellij
+    pkgs.qbittorrent
+    pkgs.rust-analyzer
+    pkgs.heroic
+    pkgs.linux-router
+    pkgs.lsof
+    pkgs.macchanger
+    pkgs.p7zip
+    pkgs.cabextract
+    pkgs.wine
+    pkgs.winetricks
+    pkgs.yad
+    pkgs.mokutil
+    pkgs.gettext
+    pkgs.lsb-release
+    pkgs.bc
+    pkgs.xorg.xrandr
+    pkgs.xorg.xhost
+    # pkgs.blender
+    pkgs.ffmpeg
+    pkgs.openssl
+    pkgs.fastfetch
+    pkgs.gdown
+    pkgs.pdftk
+    pkgs.qpdf
+    pkgs.ddcutil
+    pkgs.live-server
+    pkgs.hyprsome
+    pkgs.pkg-config
+    pkgs.meson
+    pkgs.android-tools
+    pkgs.trivy
+    pkgs.bear
+    pkgs.stdmanpages
+    pkgs.man-pages
+    pkgs.man-pages-posix
+    pkgs.xh
+    pkgs.trayscale
+    pkgs.rstudio
+    pkgs.R
+    pkgs.go
+    pkgs.sqls
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -160,6 +219,7 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  programs.yazi.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
