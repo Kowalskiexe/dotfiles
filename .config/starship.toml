@@ -28,4 +28,23 @@ disabled = true
 format = '[(\($virtualenv\) )]($style)'
 
 [nix_shell]
-format = '[\($name\)]($style) '
+symbol = '❄️'
+format = '[$symbol]($style) '
+
+[nodejs]
+disabled = true
+
+[gradle]
+disabled = true
+
+[ruby]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[kotlin]
+disabled = true
