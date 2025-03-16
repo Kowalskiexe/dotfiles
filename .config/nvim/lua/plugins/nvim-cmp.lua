@@ -92,10 +92,19 @@ return {
             -- require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
             --     capabilities = capabilities
             -- }
-            require("lspconfig")["tsserver"].setup({
+            require("lspconfig")["ts_ls"].setup({
                 capabilities = capabilities,
             })
+            -- require("lspconfig")["eslint"].setup({
+            --     capabilities = capabilities,
+            -- })
             require("lspconfig")["mojo"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["bashls"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["sqls"].setup({
                 capabilities = capabilities,
             })
             require("lspconfig")["phpactor"].setup({
@@ -108,12 +117,23 @@ return {
                 capabilities = capabilities,
             })
             require("lspconfig")["pyright"].setup({
-                capabilities = capabilities,
+                capabilities = (function()
+                    -- remove hints for unused variables
+                    local capabilities = vim.lsp.protocol.make_client_capabilities()
+                    capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+                    return capabilities
+                end)()
             })
             require("lspconfig")["clangd"].setup({
                 capabilities = capabilities,
             })
             require("lspconfig")["bashls"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["kotlin_language_server"].setup({
+                capabilities = capabilities,
+            })
+            require("lspconfig")["rust_analyzer"].setup({
                 capabilities = capabilities,
             })
             require("lspconfig").ruff.setup({

@@ -12,6 +12,9 @@ end
 
 -- vim.lsp.set_log_level("debug")
 
+vim.opt.spell = true
+vim.opt.scrolloff = 5
+
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
@@ -40,3 +43,5 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.textwidth = 80
   end,
 })
+
+vim.g.puppeteer_disable_filetypes = {}

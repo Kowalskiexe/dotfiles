@@ -22,7 +22,7 @@ return {
 		workspaces = {
 			{
 				name = "default",
-				path = "~/dontgoogletwice",
+				path = "~/dontgoogletwice2",
 			},
 		},
 
