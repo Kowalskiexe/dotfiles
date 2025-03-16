@@ -1,4 +1,4 @@
-(defwidget bar []
+(defwidget bar2 []
   (centerbox :orientation "h"
              :class "bar"
     (box :halign "start"
@@ -7,8 +7,8 @@
       ;; (section :name "wofi"
       ;;   (wofi))
       (section :name "workspaces"
-        (hyprland-workspaces :labels '{"1": "一", "2": "二", "3": "三", "4": "四", "5": "五", "6": "六", "7": "七", "8": "八", "9": "九", "10": "十"}'
-                             :ids '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]')))
+        (hyprland-workspaces :labels '{"11": "一", "12": "二", "13": "三", "14": "四", "15": "五", "16": "六", "17": "七", "18": "八", "19": "九", "20": "十"}'
+                             :ids '[11, 12, 13, 14, 15, 16, 17, 18, 19, 20]')))
     (box :halign "center"
          :space-evenly false
          :spacing 6
@@ -29,8 +29,8 @@
       ;;   (poweroff))
       )))
 
-(defwindow top-bar
-          :monitor 0
+(defwindow top-bar2
+          :monitor 1
           :geometry (geometry :x "0px"
                               :y "0px"
                               :width "100%"
@@ -39,4 +39,4 @@
           :windowtype "dock"
           :reserve (struts :side "top" :distance "0%")
           :exclusive true
-  (bar))
+  (bar2))

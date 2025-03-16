@@ -1,0 +1,148 @@
+(defwidget section [name]
+  (box :class "section ${name}"
+    (children)))
+
+
+(defwidget clock []
+  "${time}")
+
+(defwidget hyprland-workspaces [labels ids]
+  (box :class "hyprland-workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+       :spacing 10
+    (for id in ids
+        (button :onclick "hyprctl dispatch workspace ${id}"
+                :class {(active-workspace == id ? "active" :
+                          (workspaces-in-use[id] ? "used" : ""))}
+          (label :text "${labels[id]}")))))
+
+    ;; (button :onclick "hyprctl dispatch workspace 1"
+    ;;         :class {(active-workspace == "1" ? "active" :
+    ;;                   (workspaces-in-use-first["1"] ? "used" : ""))}
+    ;;   "一")
+    ;; (button :onclick "hyprctl dispatch workspace 2"
+    ;;         :class {(active-workspace == "2" ? "active" :
+    ;;                   (workspaces-in-use-first["2"] ? "used" : ""))}
+    ;;   "二")
+    ;; (button :onclick "hyprctl dispatch workspace 3"
+    ;;         :class {(active-workspace == "3" ? "active" :
+    ;;                   (workspaces-in-use-first["3"] ? "used" : ""))}
+    ;;   "三")
+    ;; (button :onclick "hyprctl dispatch workspace 4"
+    ;;         :class {(active-workspace == "4" ? "active" :
+    ;;                   (workspaces-in-use-first["4"] ? "used" : ""))}
+    ;;   "四")
+    ;; (button :onclick "hyprctl dispatch workspace 5" 
+    ;;         :class {(active-workspace == "5" ? "active" :
+    ;;                   (workspaces-in-use-first["5"] ? "used" : ""))}
+    ;;   "五")
+    ;; (button :onclick "hyprctl dispatch workspace 6" 
+    ;;         :class {(active-workspace == "6" ? "active" :
+    ;;                   (workspaces-in-use-first["6"] ? "used" : ""))}
+    ;;   "六")
+    ;; (button :onclick "hyprctl dispatch workspace 7" 
+    ;;         :class {(active-workspace == "7" ? "active" :
+    ;;                   (workspaces-in-use-first["7"] ? "used" : ""))}
+    ;;   "七")
+    ;; (button :onclick "hyprctl dispatch workspace 8"
+    ;;         :class {(active-workspace == "8" ? "active" :
+    ;;                   (workspaces-in-use-first["8"] ? "used" : ""))}
+    ;;   "八")
+    ;; (button :onclick "hyprctl dispatch workspace 9"
+    ;;         :class {(active-workspace == "9" ? "active" :
+    ;;                   (workspaces-in-use-first["9"] ? "used" : ""))}
+    ;;   "九")
+    ;; (button :onclick "hyprctl dispatch workspace 10"
+    ;;         :class {(active-workspace == "10" ? "active" :
+    ;;                   (workspaces-in-use-first["10"] ? "used" : ""))}
+    ;;   "十")))
+
+(defwidget poweroff []
+  (button :onclick "powermenu"
+    (image :path "./icons/power-off-solid-white.png"
+           :image-width 15
+           :image-height 15)))
+
+(defwidget wofi []
+  (button :onclick "/home/inter/.local/bin/menu"
+    (image :path "./icons/archlinux-white.png"
+           :image-width 15
+           :image-height 15)))
+
+(defwidget battery []
+  (box :space-evenly false
+       :tooltip "${EWW_BATTERY.BAT0.capacity}% ${battery-time}"
+    (image :path "./icons/power-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {EWW_BATTERY.BAT0.status == "Charging"}
+           :class "status")
+    (image :path "./icons/tick-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {EWW_BATTERY.BAT0.status == "Full"}
+           :class "status")
+    (image :path "./icons/battery-0-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {EWW_BATTERY.BAT0.capacity <= 20})
+    (image :path "./icons/battery-1-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {20 < EWW_BATTERY.BAT0.capacity && EWW_BATTERY.BAT0.capacity <= 40})
+    (image :path "./icons/battery-2-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {40 < EWW_BATTERY.BAT0.capacity && EWW_BATTERY.BAT0.capacity <= 60})
+    (image :path "./icons/battery-3-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {60 < EWW_BATTERY.BAT0.capacity && EWW_BATTERY.BAT0.capacity <= 80})
+    (image :path "./icons/battery-4-white.png"
+           :image-width 25
+           :image-height 25
+           :visible {80 < EWW_BATTERY.BAT0.capacity})
+    (label :text "${EWW_BATTERY.BAT0.capacity}% ${battery-time}"
+           :visible {EWW_BATTERY.BAT0.status == "Discharging" || EWW_BATTERY.BAT0.status == "Charging"})))
+
+(defwidget sound-volume [?vol]
+  (eventbox :onscroll "setvolumeupanoch {}"
+            :onclick "setvolumeupanoch mute"
+            :onrightclick "pavu"
+            :tooltip "${run-update-volume-file}"
+    (box :space-evenly false
+      (image :path "./icons/speaker3-white.png"
+             :image-width 15
+             :image-height 15)
+      (label :text "${volume}"))))
+
+(defwidget network []
+  (box :space-evenly false
+    (image :path "./icons/ethernet-white.png"
+           :image-width 15
+           :image-height 15
+           :visible {connection.eth})
+    (label :text "${connection.name} "
+           :visible {!connection.eth && connection.wifi})
+    (image :path "./icons/bar_a1-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 1})
+    (image :path "./icons/bar_a2-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 2})
+    (image :path "./icons/bar_a3-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 3})
+    (image :path "./icons/bar_a4-white.png"
+           :image-width 13
+           :image-height 13
+           :visible {!connection.eth && connection.wifi && connection.bars == 4})
+    (image :path "./icons/offline-red.png"
+           :image-width 19
+           :image-height 19
+           :visible {!connection.eth && !connection.wifi})))

@@ -2,6 +2,7 @@
 
 echo "starting activeworkspace.sh"
 line=""
+eww update active-workspace=1
 while read line; do
 	active=$(hyprctl activeworkspace -j | jq '.id')
 	# echo $active

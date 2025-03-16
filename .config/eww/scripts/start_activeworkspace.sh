@@ -11,7 +11,7 @@ flock -x -n 9 || exit      # grab that lock, or exit the script early
 logs_dir="$(dirname "$0")/../logs"
 
 echo 'started_aw'
-socat -t1000000 - UNIX-CLIENT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock 2> "$logs_dir/activeworkspace_error.log" \
+socat -t1000000 - UNIX-CLIENT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock 2>> "$logs_dir/activeworkspace_error.log" \
     | tee "$logs_dir/activeworkspace_socket.log" \
-    | "$(dirname "$0")/activeworkspace.sh" &> "$logs_dir/activeworkspace.log"
+    | "$(dirname "$0")/activeworkspace.sh" &>> "$logs_dir/activeworkspace.log"
 echo 'end_aw'
