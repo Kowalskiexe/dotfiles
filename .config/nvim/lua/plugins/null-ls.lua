@@ -9,8 +9,8 @@ return {
             sources = {
                 null_ls.builtins.formatting.stylua,
                 -- null_ls.builtins.formatting.ruff,
-                null_ls.builtins.formatting.isort,
-                -- null_ls.builtins.formatting.prettier,
+                -- null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.prettier,
                 null_ls.builtins.completion.spell,
                 null_ls.builtins.completion.luasnip,
                 null_ls.builtins.code_actions.refactoring,
@@ -24,7 +24,7 @@ return {
                 require("none-ls.formatting.eslint_d"),
                 -- require("none-ls.diagnostics.cpplint"),
                 require("none-ls.formatting.jq"),
-                require("none-ls.formatting.autopep8"),
+                -- require("none-ls.formatting.autopep8"),
             },
         })
     end,

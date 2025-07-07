@@ -25,12 +25,13 @@ vim.cmd("set relativenumber")
 vim.cmd("set number relativenumber")
 vim.cmd("set cc=80")
 vim.cmd("setlocal spell spelllang=en_us")
+vim.cmd("set clipboard+=unnamedplus")
 
 -- Determine how text with the "conceal" syntax attribute :syn-conceal
 -- 	is shown: (needed fo obsidian)
 vim.cmd("set conceallevel=2")
 
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("nightfox")
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
@@ -45,3 +46,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.g.puppeteer_disable_filetypes = {}
+
+vim.g.typst_pdf_viewer = "zathura"

@@ -3,12 +3,30 @@ return {
         "yetone/avante.nvim",
         event = "VeryLazy",
         lazy = false,
-        version = "*", -- set this if you want to always pull the latest change
+        branch = "main", -- set this if you want to always pull the latest change
         opts = {
             -- add any opts here
-            provider = "claude",
+            provider = "lmstudio",
             gemini = {
-                model = "gemini-2.0-flash-thinking-exp-1219", -- it's trash
+                model = "gemini-2.0-flash-thinking-exp-01-21",
+            },
+            debug = false,
+            ollama = {
+                api_key_name = "",
+                endpoint = "http://127.0.0.1:11434",
+                model = "gemma3:1b",
+                stream = true,
+                disable_tools = true,
+            },
+            vendors = {
+                ---@type AvanteProvider
+                lmstudio = {
+                    __inherited_from = 'openai',
+                    endpoint = "http://100.75.30.32:1234/v1",
+                    api_key_name = "",
+                    model = "devstral-small-2505",
+                    disable_tools = true,
+                },
             },
             behaviour = {
                 auto_suggestions = false, -- Experimental stage
@@ -17,6 +35,7 @@ return {
                 auto_apply_diff_after_generation = false,
                 support_paste_from_clipboard = false,
                 minimize_diff = false, -- Whether to remove unchanged lines when applying a code block
+                enable_cursor_planning_mode = false, -- for non-claude models
             },
             mappings = {
                 --- @class AvanteConflictMappings

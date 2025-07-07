@@ -13,6 +13,7 @@ return {
             vim.keymap.set("n", "<leader>fk", builtin.keymaps, opts)
             vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, opts)
             vim.keymap.set("n", "<leader>fd", builtin.diagnostics, opts)
+            vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", opts)
         end,
     },
     {

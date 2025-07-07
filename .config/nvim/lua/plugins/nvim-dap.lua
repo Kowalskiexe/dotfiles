@@ -2,7 +2,7 @@ return {
     {
         "mfussenegger/nvim-dap",
         dependencies = {
-            "mortepau/codicons.nvim",
+            "ChristianChiarulli/neovim-codicons",
             "nvim-neotest/nvim-nio",
             "nvim-telescope/telescope-dap.nvim",
             "theHamsta/nvim-dap-virtual-text",
@@ -17,8 +17,8 @@ return {
             --vim.highlight.create('DapLogPoint', { ctermbg=0, guifg='#61afef', guibg='#31353f' }, false)
             --vim.highlight.create('DapStopped', { ctermbg=0, guifg='#98c379', guibg='#31353f' }, false)
 
-            vim.fn.sign_define('DapBreakpoint', { text='🐛', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-            vim.fn.sign_define('DapBreakpointCondition', { text='❓', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+            vim.fn.sign_define('DapBreakpoint', { text='🔴', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+            vim.fn.sign_define('DapBreakpointCondition', { text='⭕', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
             vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
             vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
             vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
@@ -40,6 +40,7 @@ return {
             vim.keymap.set("n", "<Leader>dc", dap.continue, {})
             vim.keymap.set("n", "<C-n>", dap.step_over, {})
             vim.keymap.set("n", "<C-m>", dap.step_into, {})
+            vim.keymap.set("n", "<C-b>", dap.step_out, {})
 
             vim.keymap.set("n", "<Leader>dd", dapui.toggle, {})
 
@@ -90,6 +91,14 @@ return {
                             return '/usr/bin/python'
                         end
                     end;
+                },
+                {
+                    type = 'python',
+                    request = 'attach',
+                    name = 'Attach to running debugpy server',
+                    host = '0.0.0.0',  -- The host where debugpy is running
+                    port = 5678,         -- The port debugpy is listening on (default is 5678)
+                    justMyCode = false,  -- Set to true if you only want to debug your code
                 },
             }
         end

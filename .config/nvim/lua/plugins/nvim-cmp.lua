@@ -10,9 +10,11 @@ return {
         dependencies = {
             "luckasRanarison/tailwind-tools.nvim",
             "onsails/lspkind-nvim",
+            "FelipeLema/cmp-async-path",
         },
         config = function()
             local cmp = require("cmp")
+            local luasnip = require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
             cmp.setup({
                 snippet = {
@@ -36,7 +38,45 @@ return {
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Enter>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    ["<CR>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if luasnip.expandable() then
+                                luasnip.expand()
+                            else
+                                cmp.confirm({ select = false })
+                            end
+                        else
+                            fallback()
+                        end
+                    end),
+
+                    -- ["<Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_next_item()
+                    --     elseif luasnip.locally_jumpable(1) then
+                    --         luasnip.jump(1)
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, { "i", "s" }),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
@@ -47,6 +87,7 @@ return {
                     { name = "buffer" },
                     { name = "nvim_lsp_signature_help" },
                     -- { name = "supermaven" },
+                    { name = 'async_path' },
                 }),
                 formatting = {
                     format = require("lspkind").cmp_format({
@@ -107,6 +148,9 @@ return {
             require("lspconfig")["sqls"].setup({
                 capabilities = capabilities,
             })
+            require("lspconfig")["yamlls"].setup({
+                capabilities = capabilities,
+            })
             require("lspconfig")["phpactor"].setup({
                 capabilities = capabilities,
             })
@@ -116,14 +160,31 @@ return {
             require("lspconfig")["nil_ls"].setup({
                 capabilities = capabilities,
             })
-            require("lspconfig")["pyright"].setup({
-                capabilities = (function()
-                    -- remove hints for unused variables
-                    local capabilities = vim.lsp.protocol.make_client_capabilities()
-                    capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-                    return capabilities
-                end)()
+            require("lspconfig")["html"].setup({
+                capabilities = capabilities,
             })
+            require("lspconfig").pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    pyright = {
+                        disableOrganizeImports = false,
+                    },
+                    python = {
+                        analysis = {
+                            ignore = { "*" },
+                            logLevel = "Information",
+                            autoImportCompletions = true,
+                            autoSearchPaths = true,
+                            diagnosticMode = "off",
+                            typeCheckingMode = "off",
+                            useLibraryCodeForTypes = false,
+                        },
+                    },
+                },
+            })
+            -- require("lspconfig")["pyrefly"].setup({
+            --     capabilities = capabilities,
+            -- })
             require("lspconfig")["clangd"].setup({
                 capabilities = capabilities,
             })
