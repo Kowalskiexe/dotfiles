@@ -11,7 +11,6 @@ in
   home.username = "inter";
   home.homeDirectory = "/home/inter";
 
-  nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
 
   # This value determines the Home Manager release that your configuration is
@@ -27,9 +26,10 @@ in
   # environment.
   home.packages = [
     pkgs.cmatrix
+    pkgs.hollywood
     pkgs.aerc
     pkgs.zotero
-    pkgs.syncthing
+    # pkgs.syncthing
     pkgs.blender
     pkgs.git-standup
     pkgs.inxi
@@ -51,7 +51,7 @@ in
     pkgs.fcitx5
     pkgs.brightnessctl
     pkgs.fish
-    pkgs.lolcat
+    pkgs.dotacat  # faster lolcat, it indeed is noticeably faster
     pkgs.cowsay
     pkgs.neofetch
     pkgs.bat
@@ -69,20 +69,20 @@ in
     pkgs.jq
     pkgs.udiskie
     pkgs.kdePackages.polkit-kde-agent-1
-    pkgs.caffeine-ng
     pkgs.swayidle
     pkgs.bluez
     pkgs.blueman
     pkgs.playerctl
     pkgs.zathura
+    pkgs.sioyek
     pkgs.pdfgrep
     pkgs.texliveFull
     pkgs.xdotool
-    pkgs.signal-desktop
+    pkgs.signal-desktop-bin
     pkgs.gimp
     pkgs.neovide
     pkgs.obsidian
-    pkgs.libreoffice-qt6-fresh
+    pkgs.libreoffice
     pkgs.cloc
     pkgs.wl-clipboard
     pkgs.ruff
@@ -104,7 +104,7 @@ in
     pkgs.php
     pkgs.logisim-evolution
     pkgs.google-cloud-sdk
-    pkgs.godot_4
+    # pkgs.godot
     pkgs.cpufetch
     pkgs.code-cursor
     pkgs.quarto
@@ -133,8 +133,9 @@ in
     pkgs.bc
     pkgs.xorg.xrandr
     pkgs.xorg.xhost
-    # pkgs.blender
+    pkgs.blender
     pkgs.ffmpeg
+    pkgs.hypridle
     pkgs.openssl
     pkgs.fastfetch
     pkgs.gdown
@@ -157,6 +158,38 @@ in
     pkgs.R
     pkgs.go
     pkgs.sqls
+    pkgs.ngspice  # for uni
+    pkgs.usbimager
+    pkgs.woeusb
+    pkgs.wireshark
+    pkgs.arduino
+    pkgs.sonar-scanner-cli
+    pkgs.gti
+    pkgs.claude-code
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-media-player
+    pkgs.koreader
+    pkgs.eza  # better ls
+    pkgs.fd # better find, dependency for pyamble nvim plugin
+    pkgs.grip-grab # dependency for pyamble nvim plugin
+    pkgs.basedpyright # python lsp
+    pkgs.lua-language-server # lua lsp
+    pkgs.yaml-language-server # yaml lsp
+    pkgs.lan-mouse
+    pkgs.ollama
+    pkgs.aider-chat-with-playwright
+    pkgs.tealdeer  # tldr
+    pkgs.timer  # sleep with progress bar
+    pkgs.typst
+    pkgs.element-desktop
+    pkgs.traceroute
+    pkgs.marp-cli
+    pkgs.prometheus-node-exporter
+    pkgs.ethtool
+    pkgs.kdePackages.kdenlive
+    pkgs.nmap
+    pkgs.git-quick-stats
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -208,10 +241,11 @@ in
   };
 
   services.mpris-proxy.enable = true;
+  services.syncthing.enable = true;
 
-  qt.enable = true;
-  qt.platformTheme.name = "gtk";
-  qt.style.name = "adwaita-dark";
+    # qt.enable = true;
+    # qt.platformTheme.name = "gtk";
+    # qt.style.name = "adwaita-dark";
 
   gtk.enable = true;
   gtk.cursorTheme.name = "Notwaita-Black";
@@ -220,6 +254,17 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.yazi.enable = true;
+
+  programs.hyprlock.enable = true;
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+    ];
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
