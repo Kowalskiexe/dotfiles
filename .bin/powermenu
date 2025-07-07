@@ -5,7 +5,7 @@ mode=$(echo -e "$options" | wofi --show dmenu)
 echo "$mode"
 
 case "$mode" in
-"lock") swaylock ;;
+"lock") hyprlock ;;
 "suspend") systemctl suspend ;;
 "poweroff") systemctl poweroff ;;
 "reboot") systemctl reboot ;;
