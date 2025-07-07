@@ -36,5 +36,32 @@ set -x GPG_TTY (tty)
 
 set -x MANPAGER "less -R --use-color -Dd+r -Du+b"
 
+set -x ANTHROPIC_API_KEY (cat ~/.config/.anthropic_api_key)
+set -x GEMINI_API_KEY (cat ~/.config/.gemini_api_key)
+
+set -x LM_STUDIO_API_KEY "dummy"
+set -x LM_STUDIO_API_BASE "http://heavy:1234/v1"
 
 #eval (tmuxifier init - fish)
+
+fish_ssh_agent
+
+
+# Productivity corner
+# https://github.com/bashbunni/dotfiles/blob/19dccafbd01bd18c240d76e0f3de50876fd0c7a3/zsh/.zshrc#L78C1-L94C28
+
+function pomodoro
+    set val $argv[1]
+    echo $val | dotacat
+    timer "$val"m
+    notify-send "'$val' session done"
+end
+
+# Aliases in fish are defined with functions
+function work
+    pomodoro 45
+end
+
+function br
+    pomodoro 10
+end

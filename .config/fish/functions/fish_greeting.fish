@@ -3,5 +3,5 @@ function fish_greeting
     if test "$message" = ""
         set message "idk"
     end
-    cowsay -f "/home/inter/.config/fish/functions/cat.cow" "$message" | lolcat
+    cowsay -f "/home/inter/.config/fish/functions/cat.cow" "$message" | dotacat
 end
