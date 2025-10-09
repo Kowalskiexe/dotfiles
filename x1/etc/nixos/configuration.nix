@@ -1,13 +1,16 @@
-# Edit this configuration file to define what should be installed on
+# edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
+      (import "${home-manager}/nixos")
       <nixos-hardware/lenovo/thinkpad>
     ];
  
@@ -15,6 +18,23 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   systemd.services.dlm.wantedBy = [ "multi-user.target" ];
+
+  # powerManagement.enable = true;
+  # services.auto-cpufreq.enable = true;
+  # services.auto-cpufreq.settings = {
+  #   battery = {
+  #      governor = "powersave";
+  #      turbo = "never";
+  #   };
+  #   charger = {
+  #      governor = "performance";
+  #      turbo = "auto";
+  #   };
+  # };
+
+  services.upower.enable = true;
+
+  services.udisks2.enable = true;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -33,6 +53,13 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     evdi
   ];
+  boot.blacklistedKernelModules = [ "evdi" ];
+  boot.kernelModules = [ "udl" ];
+  boot.kernelParams = [
+    # "acpi=off"
+    "xhci_hcd.quirks=1048576"
+    "dell-laptop.force_rfkill=0"
+  ];
 
   networking.hostName = "x1"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -46,12 +73,15 @@
 
   services.hardware.bolt.enable = true;
 
-  # services.pgadmin = {
-  #   enable = true;
-  #   minimumPasswordLength = 0;
-  #   initialEmail = "kowalski.exe@gmail.com";
-  #   initialPasswordFile = "/dev/null";
-  # };
+  # enable fingerprint unlocking
+  services.fprintd = {
+    enable = true;
+    package = pkgs.fprintd-tod;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -65,7 +95,8 @@
       enable = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
-        intel-media-driver
+	intel-media-driver
+	libva
       ];
     };
     bluetooth = {
@@ -85,6 +116,7 @@
   ''
     127.0.0.1 mbp
     127.0.0.1 my.matrix.host
+    127.0.0.1 local.host
   '';
 
   # Select internationalisation properties.
@@ -94,14 +126,16 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Enable the X11 windowing system.
   services.xserver.enable = false;
   services.xserver.videoDrivers = [ "displaylink" ];
-  # services.xserver.displayManager.gdm = {
-  #   enable = true;
-  #   wayland = true;
-  # };
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+    autoSuspend = false;
+  };
   # services.displayManager.enable = false;
   # services.displayManager.ly.enable = true;
   # services.displayManager.sddm = {
@@ -114,10 +148,6 @@
   services.gvfs.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
-
-  services.onedrive.enable = true;
-
-  services.syncthing.enable = true;
 
   services.kanata = {
     enable = true;
@@ -163,7 +193,6 @@
     jack.enable = true;
   };
 
-
   programs.virt-manager.enable = true;
 
   # Enable common container config files in /etc/containers
@@ -187,6 +216,9 @@
       storageDriver = "btrfs";
     };
   };
+  services.k3s = {
+    enable = false;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -196,7 +228,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "uinput" "docker" "libvirtd"]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = [
-      # yeah, that's my public key
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILc/IQW+eGrh1MWxi86PxrIVcKjNj/udTuMWhq/lCuy/ kowalski.exe@gmail.com"
     ];
   };
@@ -222,9 +253,6 @@
     libgcc
     gcc
     zlib
-    linuxKernel.packages.linux_xanmod.tp_smapi  # ThinkPad only
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
     (python3.withPackages(ps: with ps; [ numpy setuptools ]))
     kotlin
     gradle
@@ -250,6 +278,17 @@
     virtualglLib
     rpi-imager
     hyprpolkitagent
+    wol  # wake-on-lan
+    supermin
+    fwupd
+    fwupd-efi
+    efibootmgr
+    pciutils
+    # pyrefly
+    vuls
+    kubectl
+    kind # kubernetes in docker
+    kubernetes-helm
   ];
   environment = {
     sessionVariables = {
@@ -298,7 +337,7 @@
 
   programs.java.enable = true;
 
-  security.pam.services.swaylock = {};
+  home-manager.users.inter = import /home/inter/.config/home-manager/home.nix;
 
   # List services that you want to enable:
 
@@ -306,10 +345,20 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    9090 # calibre
+    8096 # jellyfin
+    7359 # jellyfin
+    5173 # vite
+  ];
+  networking.firewall.allowedUDPPorts = [ 
+    9090 # calibre
+    8096 # jellyfin
+    7359 # jellyfin
+    5173 # vite
+  ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
