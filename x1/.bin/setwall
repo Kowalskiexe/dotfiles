@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if ! [ -n "$1" ]; then
+	echo 'Provide path to the wallpaper as your argument!'
+	exit
+fi
+
+wallpaper_path=$(realpath "$1")
+
+echo "setting ${wallpaper_path}..."
+
+# update pywal colorscheme
+wal -i "$wallpaper_path"
+
+# save wallpaper's path
+echo "$wallpaper_path" >~/.config/wallpaper_path
+
+# finally change wallpaper
+swww img "$wallpaper_path" --transition-type random
+eww reload

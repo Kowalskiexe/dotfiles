@@ -11,7 +11,7 @@ in
   home.username = "inter";
   home.homeDirectory = "/home/inter";
 
-  fonts.fontconfig.enable = true;
+  # fonts.fontconfig.enable = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -26,9 +26,7 @@ in
   # environment.
   home.packages = [
     pkgs.cmatrix
-    pkgs.hollywood
     pkgs.aerc
-    pkgs.zotero
     # pkgs.syncthing
     pkgs.blender
     pkgs.git-standup
@@ -95,14 +93,12 @@ in
     pkgs.mpv
     pkgs.conda
     pkgs.file
-    pkgs.flutter
     pkgs.vscode
     pkgs.slack
     pkgs.anki
     pkgs.android-file-transfer
     pkgs.gnumake
     pkgs.php
-    pkgs.logisim-evolution
     pkgs.google-cloud-sdk
     # pkgs.godot
     pkgs.cpufetch
@@ -113,7 +109,6 @@ in
     pkgs.luajitPackages.luarocks
     pkgs.stow
     pkgs.acpi
-    pkgs.irssi
     pkgs.calibre
     pkgs.zellij
     pkgs.qbittorrent
@@ -168,7 +163,6 @@ in
     pkgs.claude-code
     pkgs.jellyfin
     pkgs.jellyfin-web
-    pkgs.jellyfin-media-player
     pkgs.koreader
     pkgs.eza  # better ls
     pkgs.fd # better find, dependency for pyamble nvim plugin
@@ -178,7 +172,7 @@ in
     pkgs.yaml-language-server # yaml lsp
     pkgs.lan-mouse
     pkgs.ollama
-    pkgs.aider-chat-with-playwright
+    # pkgs.aider-chat-with-playwright
     pkgs.tealdeer  # tldr
     pkgs.timer  # sleep with progress bar
     pkgs.typst
@@ -190,6 +184,24 @@ in
     pkgs.kdePackages.kdenlive
     pkgs.nmap
     pkgs.git-quick-stats
+    # pkgs.kicad
+    pkgs.timewall
+    pkgs.ghostty
+    pkgs.albert
+    pkgs.most
+    # pkgs.google-cloud-sdk
+    pkgs.azure-cli
+    pkgs.k9s
+    pkgs.jetbrains.datagrip  # god bless student's license
+    pkgs.mkcert
+    pkgs.caddy
+    pkgs.nss
+    pkgs.dig
+    pkgs.inetutils
+    pkgs.nms
+    pkgs.postgresql
+    pkgs.gitleaks
+
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

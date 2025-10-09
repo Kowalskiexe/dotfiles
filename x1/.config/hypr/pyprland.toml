@@ -2,7 +2,7 @@
 plugins = ["scratchpads"]
 
 [scratchpads.term]
-command = "kitty --class scratchpad"
+command = "kitty --class scratchpad -e tmux new-session -c ~"
 animation = "fromTop"
 lazy = true
 

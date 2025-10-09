@@ -16,6 +16,9 @@ if status is-interactive
     alias gpl "git pull"
     alias gf "git fetch"
 
+    # alias kubectl 'sudo kubectl --kubeconfig ~/.kube/config'
+    alias kubectl 'kubectl --kubeconfig ~/.kube/config'
+
     atuin init fish | source
     zoxide init fish --cmd cd | source
     starship init fish | source
@@ -25,6 +28,7 @@ set EDITOR nvim
 
 ulimit -n 4096
 bind --user -M insert \ch accept-autosuggestion
+bind --user -M insert ctrl-y 'y'
 
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.bin"
