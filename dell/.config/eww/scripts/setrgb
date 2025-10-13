@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if ! [ -n $1 ]; then
+	echo "Provide file path a the first argument"
+	exit
+fi
+
+file=$1
+red=$2
+green=$3
+blue=$4
+
+magick "$file" -channel red -fx "$red" -channel green -fx "$green" -channel blue -fx "$blue" "colored_${file}"

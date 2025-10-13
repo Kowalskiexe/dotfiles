@@ -1,0 +1,23 @@
+(defvar daily-fortune "general kenobi")
+
+(deflisten run-daily-fortune :initial ""
+  "fortune/scripts/get_fortune")
+
+(defwidget fortune-text []
+  (box :class "fortune"
+    "${run-daily-fortune}${daily-fortune}"))
+
+(defwindow fortune
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "20px"
+                               :width "500px"
+                               :height "100px"
+                               :anchor "bottom center")
+           :stacking "bg"
+           :reserve (struts :distance "40px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+  (fortune-text))
+
+; vi: ft=lisp

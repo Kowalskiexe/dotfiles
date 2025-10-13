@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+connections="$(nmcli -t c show --active | tr ' ' '_')"
+is_eth=false
+is_wifi=false
+wifi_name=""
+for line in $connections; do
+	name=$(echo "$line" | cut -d ':' -f "1")
+	type=$(echo "$line" | cut -d ':' -f "3")
+	if [[ "$type" == "802-3-ethernet" ]]; then
+		is_eth=true
+	fi
+	if [[ "$type" == "802-11-wireless" ]]; then
+		is_wifi=true
+		wifi_name=$name
+	fi
+done
+
+if $is_wifi; then
+	# https://unix.stackexchange.com/questions/483396/get-connected-wi-fi-network-signal-strength-with-nmcli
+	strength=$(nmcli dev wifi list | awk '/\*/{if (NR!=1) {print $9}}')
+	strength="${strength/_*/}"
+	strength=${#strength}
+fi
+
+echo -n "{ \"eth\": $is_eth, \"wifi\": $is_wifi"
+if $is_wifi; then
+	echo -n ", \"name\": \"$wifi_name\", \"bars\": ${strength} "
+fi
+echo "}"

@@ -1,0 +1,42 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+             :class "bar"
+    (box :halign "start"
+         :space-evenly false
+         :spacing 6
+      ;; (section :name "wofi"
+      ;;   (wofi))
+      (section :name "workspaces"
+        (hyprland-workspaces :labels '{"1": "一", "2": "二", "3": "三", "4": "四", "5": "五", "6": "六", "7": "七", "8": "八", "9": "九", "10": "十"}'
+                             :ids '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]')))
+    (box :halign "center"
+         :space-evenly false
+         :spacing 6
+      (section :name "clock"
+        (clock)))
+    (box :halign "end"
+         :space-evenly false
+         :spacing 6
+      (section :name "sound-volume"
+        (sound-volume))
+      (section :name "network"
+        (network))
+      (section :name "tray"
+        (systray :class "tray" :icon-size 18 :spacing 6))
+      (section :name "battery"
+        (battery))
+      ;; (section :name "poweroff"
+      ;;   (poweroff))
+      )))
+
+(defwindow top-bar
+          :monitor 0
+          :geometry (geometry :x "0px"
+                              :y "0px"
+                              :width "100%"
+                              :height "15px"
+                              :anchor "top center")
+          :windowtype "dock"
+          :reserve (struts :side "top" :distance "0%")
+          :exclusive true
+  (bar))

@@ -1,0 +1,17 @@
+(include "./vars.yuck")
+(include "./widgets.yuck")
+(include "./fortune/fortune.yuck")
+(include "./topbar/topbar.yuck")
+(include "./topbar2/topbar.yuck")
+
+(defwindow all
+          :monitor 0
+          :geometry (geometry :x "0px"
+                              :y "0px"
+                              :width "0%"
+                              :height "0%"
+                              :anchor "top center")
+          :windowtype "dock"
+          :reserve (struts :side "top" :distance "0%")
+          :exclusive false
+    "")

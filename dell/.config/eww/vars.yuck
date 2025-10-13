@@ -1,0 +1,39 @@
+;; variables are shared between status bars
+
+(defpoll time :interval "0.1s"
+               :initial "21:37"
+               :run-while true
+  `date +"%a, %e %b, %H:%M:%S"`)
+
+(deflisten run-active-workspace :initial "prerun_aw"
+    ;; a hack to start a script from .yuck file
+    ;; NOTE: the variable must be used somewhere in
+    ;; order for this hack to work!
+    "/home/inter/.config/eww/scripts/start_activeworkspace.sh")
+
+(defvar active-workspace "1")
+
+(defvar test-workspace "1test")
+
+(deflisten run-active-workspace2 :initial "prerun_aw"
+    ;; a hack to start a script from .yuck file
+    ;; NOTE: the variable must be used somewhere in
+    ;; order for this hack to work!
+    "/home/inter/.config/eww/scripts/start_activeworkspace.sh")
+
+(deflisten run-workspaces-in-use :initial "prerun_wiu"
+    "/home/inter/.config/eww/scripts/start_workspacesinuse.sh")
+
+(deflisten run-update-volume-file :initial "prerun"
+    "/home/inter/.config/eww/scripts/update_volume_file.sh")
+
+(defpoll battery-time :interval "10s"
+  "acpi -b | tail -n 1 | sed -E 's/.*, //;s/(.{2}:.{2}).*/\\1/'")
+
+(deflisten volume :initial "0.x"
+  `tail -F /tmp/audio2137`)
+
+(defpoll connection :interval "2s"
+  "/home/inter/.config/eww/scripts/network")
+
+(defvar workspaces-in-use '{"1": true, "2": false, "3": true, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false, "11": false, "12": false, "13": false, "14": false, "15": false, "16": false, "17": false, "18": false, "19": false, "20": false}')

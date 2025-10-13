@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+case "$1" in
+"up")
+	if [[ "$2" == "" ]]; then
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%+
+	else
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ $2+
+	fi
+	;;
+"down")
+	if [[ "$2" == "" ]]; then
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%-
+	else
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ $2-
+	fi
+	;;
+"mute")
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+	;;
+esac
+echo "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed -E 's/Volume: //;s/()$/\1%/;s/([0-9])\./\1/;s/^0+//;s/^%$/0%/;s/.*MUTED.*/MUTED/')" >>"/tmp/audio2137"

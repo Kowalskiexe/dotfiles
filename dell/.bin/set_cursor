@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# NOTE: working in progress
+# setting up custom cursor for hyprland
+
+if ! [ -n "$1" ]; then
+	echo "Provide the theme's name as your first argument!"
+	echo "List aviable themes:"
+	find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors"
+	exit
+fi
+
+if ! [ -n "$2" ]; then
+	echo "Provide the cursor's size as your second argument! e.g. 20"
+	exit
+fi
+
+cursor_theme_name="$1"
+cursor_size="$2"
+gsettings set org.gnome.desktop.interface cursor-theme "$cursor_theme_name"
+gsettings set org.gnome.desktop.interface cursor-size "$cursor_size"
+hyprctl setcursor "$cursor_theme_name" "$cursor_size"
