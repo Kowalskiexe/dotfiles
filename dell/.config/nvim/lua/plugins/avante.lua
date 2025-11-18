@@ -7,18 +7,8 @@ return {
         opts = {
             -- add any opts here
             provider = "lmstudio",
-            gemini = {
-                model = "gemini-2.0-flash-thinking-exp-01-21",
-            },
             debug = false,
-            ollama = {
-                api_key_name = "",
-                endpoint = "http://127.0.0.1:11434",
-                model = "gemma3:1b",
-                stream = true,
-                disable_tools = true,
-            },
-            vendors = {
+            providers = {
                 ---@type AvanteProvider
                 lmstudio = {
                     __inherited_from = 'openai',
@@ -26,6 +16,16 @@ return {
                     api_key_name = "",
                     model = "devstral-small-2505",
                     disable_tools = true,
+                },
+                ollama = {
+                    api_key_name = "",
+                    endpoint = "http://127.0.0.1:11434",
+                    model = "gemma3:1b",
+                    stream = true,
+                    disable_tools = true,
+                },
+                gemini = {
+                    model = "gemini-2.0-flash-thinking-exp-01-21",
                 },
             },
             behaviour = {

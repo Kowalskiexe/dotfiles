@@ -14,6 +14,7 @@ return {
             vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, opts)
             vim.keymap.set("n", "<leader>fd", builtin.diagnostics, opts)
             vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", opts)
+            vim.keymap.set("n", "<leader>t", "<cmd>Telescope<CR>", opts)
         end,
     },
     {

@@ -1,5 +1,6 @@
 require("config.remap")
 require("config.lazy")
+require("config.lsp")
 
 if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")

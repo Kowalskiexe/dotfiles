@@ -96,18 +96,6 @@ return {
                 },
             })
 
-            -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
-            -- Set configuration for specific filetype.
-            --[[ cmp.setup.filetype('gitcommit', {
-            sources = cmp.config.sources({
-              { name = 'git' },
-            }, {
-              { name = 'buffer' },
-            })
-         })
-         require("cmp_git").setup() ]]
-            --
-
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -125,100 +113,6 @@ return {
                     { name = "cmdline" },
                 }),
                 matching = { disallow_symbol_nonprefix_matching = false },
-            })
-
-            -- Set up lspconfig.
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            -- Replace <YOUR_LSP_SERVER> with each lsp server you"ve enabled.
-            -- require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
-            --     capabilities = capabilities
-            -- }
-            require("lspconfig")["ts_ls"].setup({
-                capabilities = capabilities,
-            })
-            -- require("lspconfig")["eslint"].setup({
-            --     capabilities = capabilities,
-            -- })
-            require("lspconfig")["mojo"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["bashls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["sqls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["yamlls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["phpactor"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["lua_ls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["nil_ls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["html"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").pyright.setup({
-                capabilities = capabilities,
-                settings = {
-                    pyright = {
-                        disableOrganizeImports = false,
-                    },
-                    python = {
-                        analysis = {
-                            ignore = { "*" },
-                            logLevel = "Information",
-                            autoImportCompletions = true,
-                            autoSearchPaths = true,
-                            diagnosticMode = "off",
-                            typeCheckingMode = "off",
-                            useLibraryCodeForTypes = false,
-                        },
-                    },
-                },
-            })
-            -- require("lspconfig")["pyrefly"].setup({
-            --     capabilities = capabilities,
-            -- })
-            require("lspconfig")["clangd"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["bashls"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["kotlin_language_server"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["rust_analyzer"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").ruff.setup({
-                capabilities = capabilities,
-                init_options = {
-                    settings = {
-                        configuration = "~/.config/nvim/ruff.toml",
-                    },
-                },
-            })
-            -- require("lspconfig")["basedpyright"].setup {
-            --     capabilities = capabilities
-            -- }
-            -- require("lspconfig")["jedi_language_server"].setup {
-            --     capabilities = capabilities
-            -- }
-            -- require("lspconfig")["pylsp"].setup({
-            --     capabilities = capabilities,
-            -- })
-            require("lspconfig")["clangd"].setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig")["tailwindcss"].setup({
-                capabilities = capabilities,
             })
         end,
     },
