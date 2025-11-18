@@ -11,13 +11,11 @@ if status is-interactive
     alias gc "git commit"
     alias gcm "git commit -m"
     alias ga "git add"
+    alias gd "git diff"
     alias gaa "git add ."
     alias gp "git push"
     alias gpl "git pull"
     alias gf "git fetch"
-
-    # alias kubectl 'sudo kubectl --kubeconfig ~/.kube/config'
-    alias kubectl 'kubectl --kubeconfig ~/.kube/config'
 
     atuin init fish | source
     zoxide init fish --cmd cd | source
